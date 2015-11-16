@@ -2,8 +2,13 @@ package com.example.gregfunk.androidlistviewdemo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         ListView myListView = (ListView) findViewById(R.id.myListView);
 
-        ArrayList<String> family = new ArrayList<String>();
+        final ArrayList<String> family = new ArrayList<String>();
         family.add("Greg");
         family.add("Niki");
         family.add("Riley");
@@ -24,5 +29,14 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, family);
         myListView.setAdapter(arrayAdapter);
+
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Log.i("name", family.get(position));
+                Toast.makeText(MainActivity.this, family.get(position), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
