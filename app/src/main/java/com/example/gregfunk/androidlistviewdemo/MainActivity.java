@@ -1,5 +1,7 @@
 package com.example.gregfunk.androidlistviewdemo;
 
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,5 +40,19 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, family.get(position), Toast.LENGTH_LONG).show();
             }
         });
+
+
+
+        final Handler handler = new Handler();
+        Runnable run = new Runnable() {
+            @Override
+            public void run() {
+                Log.i("Runnable has run", "a second must have passed");
+
+                handler.postDelayed(this, 1000);
+            }
+        };
+        handler.post(run);
+        
     }
 }
